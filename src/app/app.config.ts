@@ -6,6 +6,12 @@ import {
 import { provideRouter, withViewTransitions } from '@angular/router';
 
 import { routes } from './app.routes';
+import {
+  provideHttpClient,
+  withFetch,
+  withInterceptors,
+} from '@angular/common/http';
+import { githubInterceptor } from '@shared/interceptors/github.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -17,5 +23,6 @@ export const appConfig: ApplicationConfig = {
         skipInitialTransition: true,
       })
     ),
+    provideHttpClient(withFetch(), withInterceptors([githubInterceptor])),
   ],
 };

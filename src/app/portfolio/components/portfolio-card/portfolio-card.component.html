@@ -1,0 +1,23 @@
+<div class="border rounded-md border-slate-800 w-full max-w-sm">
+  <img
+    class="w-full h-48 object-cover rounded-t-md"
+    [src]="repository() | imageRepo"
+    [alt]="repository().name"
+  />
+  <div class="px-4 py-2">
+    @if (repository().homepage) {
+    <a
+      href="{{ repository().homepage }}"
+      target="_blank"
+      class="text-xl font-semibold hover:underline cursor-pointer"
+      >{{ repository().name }}</a
+    >
+    }@else {
+    <span class="text-xl font-semibold hover:underline cursor-pointer">{{
+      repository().name
+    }}</span>
+    }
+
+    <p>{{ repository().description }}</p>
+  </div>
+</div>

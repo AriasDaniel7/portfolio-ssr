@@ -1,5 +1,11 @@
 const fs = require("fs");
 const path = require("path");
+const dotenv = require("dotenv");
+
+dotenv.config();
+
+const baseUrl = process.env.BASE_URL;
+const githubToken = process.env.GITHUB_TOKEN;
 
 const serverNetlify = `import { AngularAppEngine, createRequestHandler } from '@angular/ssr';
 import { getContext } from '@netlify/angular-runtime/context.mjs';
@@ -27,7 +33,32 @@ export async function netlifyAppEngineHandler(
  */
 export const reqHandler = createRequestHandler(netlifyAppEngineHandler);`;
 
+const environmentProdContent = `export const environment = {
+  production: true,
+  apiUrl: '${baseUrl}',
+  githubToken: '${githubToken}',
+};`;
+
 const serverFilePath = path.join(__dirname, "src/server.ts");
+const envProdFilePath = path.join(__dirname, "src/environments/environment.ts");
+
+function updateEnvironmentFile() {
+  try {
+    if (fs.existsSync(envProdFilePath)) {
+      fs.writeFileSync(envProdFilePath, environmentProdContent, "utf8");
+      console.log("✅ Archivo environment.ts actualizado exitosamente");
+    } else {
+      const srcDir = path.dirname(envProdFilePath);
+      fs.mkdirSync(srcDir, { recursive: true });
+      fs.writeFileSync(envProdFilePath, environmentProdContent, "utf8");
+      console.log(
+        "✅ Archivo environment.ts creado y actualizado exitosamente"
+      );
+    }
+  } catch (error) {
+    console.error("❌ Error al actualizar el archivo environment.ts:", error);
+  }
+}
 
 function deleteServerFile() {
   try {
@@ -66,4 +97,5 @@ module.exports = {
 if (require.main === module) {
   deleteServerFile();
   updateServerFile();
+  updateEnvironmentFile();
 }
