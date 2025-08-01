@@ -5,8 +5,9 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
+      "@portfolio/*": ["src/app/portfolio/*"],
       "@directives/*": ["src/app/directives/*"],
-      "@portfolio/*": ["src/app/portfolio/*"]
+      "@shared/*": ["src/app/shared/*"]
     },
     "strict": true,
     "noImplicitOverride": true,

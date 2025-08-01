@@ -1,0 +1,36 @@
+<div
+  #loadingContainer1
+  [class.hidden]="!isVisible()"
+  [class.border-r]="isAnimateInit()"
+  animationLeft
+  [animationDelay]="2000"
+  [animationDuration]="2000"
+  (animationStart)="onAnimationStart()"
+  (animationComplete)="onAnimationComplete()"
+  class="bg-slate-950 border-slate-800 h-screen w-1/2 z-50 overflow-x-hidden flex justify-center items-end flex-col absolute top-0 left-0 right-0 bottom-0"
+>
+  <span
+    animeTextLoading
+    [animationDuration]="100"
+    class="text-4xl md:text-6xl text-green-500 text-shadow-lg text-shadow-blue-900 font-bold mr-2"
+  >
+    {{ "{/}" }} Code</span
+  >
+</div>
+
+<div
+  #loadingContainer2
+  [class.hidden]="!isVisible()"
+  [class.border-l]="isAnimateInit()"
+  animateRight
+  [animationDelay]="2000"
+  [animationDuration]="2000"
+  class="bg-slate-950 border-slate-800 h-screen overflow-x-hidden w-1/2 absolute top-0 right-0 z-50 flex justify-start items-center"
+>
+  <span
+    animeTextLoading
+    [animationDuration]="100"
+    class="text-4xl md:text-6xl text-green-500 text-shadow-lg text-shadow-blue-900 font-bold ml-2"
+    >Arias</span
+  >
+</div>
