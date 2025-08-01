@@ -62,10 +62,11 @@ export class AnimateTextLoadingDirective implements AfterViewInit, OnInit {
       rotate: [
         {
           to: [-90, 0],
+          duration: stagger(200, { start: 500 }),
         },
       ],
       duration: stagger(200, { start: 500 }),
       ease: 'outBounce',
-    });
+    }).init();
   }
 }
