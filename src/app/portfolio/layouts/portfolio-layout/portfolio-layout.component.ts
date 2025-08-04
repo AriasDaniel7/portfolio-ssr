@@ -10,12 +10,4 @@ import { TextLoadingComponent } from '@shared/components/text-loading/text-loadi
   styleUrl: './portfolio-layout.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class PortfolioLayoutComponent {
-  itemList = signal<string[]>([
-    '@Component',
-    '@Injectable',
-    '@Directive',
-    '@Pipe',
-    '@NgModule',
-  ]);
-}
+export default class PortfolioLayoutComponent {}
