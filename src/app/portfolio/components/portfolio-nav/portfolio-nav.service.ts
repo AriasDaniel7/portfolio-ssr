@@ -6,7 +6,6 @@ import {
   PLATFORM_ID,
   signal,
 } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -34,6 +33,9 @@ export class PortfolioNavService {
         return;
       case 'Habilidades':
         elementId = 'Habilidades';
+        break;
+      case 'Proyectos':
+        elementId = 'Proyectos';
         break;
     }
 

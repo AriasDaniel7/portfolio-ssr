@@ -12,13 +12,11 @@
 
         <!-- Botones de acción -->
         <portfolio-button-description></portfolio-button-description>
-        <pre>{{ activeItem() | json }}</pre>
       </div>
 
       <div>
         <!-- Animación de fondo -->
         <portfolio-user-logo></portfolio-user-logo>
-
         <portfolio-user-description></portfolio-user-description>
       </div>
     </div>
@@ -29,6 +27,50 @@
   <portfolio-tech-stack></portfolio-tech-stack>
 </section>
 
-<!-- <img [src]="''" alt="" /> -->
+<section id="Proyectos" class="py-20">
+  <div class="max-w-[90rem] mx-auto">
+    <div class="text-center mb-16">
+      <h2
+        class="uppercase text-4xl md:text-5xl font-bold font-mono bg-gradient-to-r from-pink-400 to-cyan-400 bg-clip-text text-transparent mb-6"
+      >
+        [PROYECTOS_DESTACADOS]
+      </h2>
+      <p class="text-violet-400 text-xl font-mono">
+        Soluciones reales en producción
+      </p>
+    </div>
 
-<!-- <pre>{{ repo1 | json }}</pre> -->
+    @if(reposiroriesQuery.isSuccess() && !reposiroriesQuery.isLoading()){
+    <portfolio-list-project
+      [repos]="reposiroriesQuery.data().repos"
+    ></portfolio-list-project>
+    <div class="flex justify-center items-center mt-8 gap-4">
+      <button
+        class="inline-flex transition-colors font-mono hover:bg-violet-500/20 duration-300 text-violet-400 text-base font-medium cursor-pointer px-3 h-8 items-center justify-center rounded-md border border-violet-500/30"
+        (click)="prevPage()"
+        [disabled]="!reposiroriesQuery.data().pagination.hasPrev"
+        [class.opacity-50]="!reposiroriesQuery.data().pagination.hasPrev"
+        [class.cursor-none]="!reposiroriesQuery.data().pagination.hasPrev"
+      >
+        Anterior
+      </button>
+      <button
+        class="inline-flex transition-colors font-mono hover:bg-violet-500/20 duration-300 text-violet-400 text-base font-medium cursor-pointer px-3 h-8 items-center justify-center rounded-md border border-violet-500/30"
+        (click)="nextPage()"
+        [disabled]="!reposiroriesQuery.data().pagination.hasNext"
+        [class.opacity-50]="!reposiroriesQuery.data().pagination.hasNext"
+        [class.cursor-none]="!reposiroriesQuery.data().pagination.hasNext"
+      >
+        Siguiente
+      </button>
+    </div>
+    }@else {
+    <!-- loading skeleton -->
+    <div class="flex flex-wrap gap-8 justify-center">
+      @for (_ of '123'; track $index) {
+      <portfolio-card-project-loading></portfolio-card-project-loading>
+      }
+    </div>
+    }
+  </div>
+</section>

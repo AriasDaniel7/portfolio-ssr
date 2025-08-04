@@ -12,6 +12,15 @@ import {
   withInterceptors,
 } from '@angular/common/http';
 import { githubInterceptor } from '@shared/interceptors/github.interceptor';
+import {
+  provideClientHydration,
+  withEventReplay,
+} from '@angular/platform-browser';
+import {
+  provideTanStackQuery,
+  QueryClient,
+  withDevtools,
+} from '@tanstack/angular-query-experimental';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -23,6 +32,8 @@ export const appConfig: ApplicationConfig = {
         skipInitialTransition: true,
       })
     ),
+    provideClientHydration(withEventReplay()),
     provideHttpClient(withFetch(), withInterceptors([githubInterceptor])),
+    provideTanStackQuery(new QueryClient()),
   ],
 };

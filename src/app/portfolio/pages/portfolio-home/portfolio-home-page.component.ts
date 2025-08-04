@@ -1,7 +1,6 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  HostListener,
   inject,
   OnInit,
   PLATFORM_ID,
@@ -13,10 +12,12 @@ import { PortfolioUserLogoComponent } from '@portfolio/components/portfolio-user
 import { PortfolioUserDescriptionComponent } from '@portfolio/components/portfolio-user-description/portfolio-user-description.component';
 import { PortfolioTechStackComponent } from '@portfolio/components/portfolio-tech-stack/portfolio-tech-stack.component';
 import { PortfolioHomeService } from './portfolio-home.service';
-import { isPlatformBrowser, JsonPipe } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 import { PortfolioNavService } from '@portfolio/components/portfolio-nav/portfolio-nav.service';
 
-import { toSignal } from '@angular/core/rxjs-interop';
+import { PortfolioService } from '@portfolio/services/portfolio.service';
+import { PortfolioListProjectComponent } from '@portfolio/components/portfolio-list-project/portfolio-list-project.component';
+import { PortfolioCardProjectLoadingComponent } from '@portfolio/components/portfolio-card-project-loading/portfolio-card-project-loading.component';
 
 @Component({
   selector: 'app-portfolio-home-page',
@@ -27,7 +28,8 @@ import { toSignal } from '@angular/core/rxjs-interop';
     PortfolioUserLogoComponent,
     PortfolioUserDescriptionComponent,
     PortfolioTechStackComponent,
-    JsonPipe,
+    PortfolioListProjectComponent,
+    PortfolioCardProjectLoadingComponent,
   ],
   templateUrl: './portfolio-home-page.component.html',
   styleUrl: './portfolio-home-page.component.scss',
@@ -36,13 +38,24 @@ import { toSignal } from '@angular/core/rxjs-interop';
 export default class PortfolioHomePageComponent implements OnInit {
   private portfolioHomeService = inject(PortfolioHomeService);
   private portfolioNavService = inject(PortfolioNavService);
+  private portfolioService = inject(PortfolioService);
   private platformId = inject(PLATFORM_ID);
 
-  activeItem = this.portfolioNavService.activeItem;
+  reposiroriesQuery = this.portfolioService.repositoriesQuery;
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
       this.portfolioNavService.setActiveItem('Inicio');
     }
+  }
+
+  nextPage() {
+    this.portfolioService.currentPage.update((page) => page + 1);
+  }
+
+  prevPage() {
+    this.portfolioService.currentPage.update((page) =>
+      page > 1 ? page - 1 : 1
+    );
   }
 }
