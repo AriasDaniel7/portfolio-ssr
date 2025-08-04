@@ -1,0 +1,52 @@
+<div class="max-w-7xl mx-auto py-20">
+  <div class="text-center mb-16">
+    <h2
+      class="uppercase text-4xl md:text-5xl font-bold font-mono bg-gradient-to-r from-violet-400 to-pink-400 bg-clip-text text-transparent mb-6"
+    >
+      [Tech_stack]
+    </h2>
+    <p class="text-cyan-400 text-xl font-mono">
+      Tecnologías dominadas en 2+ años
+    </p>
+  </div>
+
+  <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+    @for (skill of skills(); track $index) {
+    <div class="group relative">
+      <div
+        class="flex flex-col bg-slate-900/80 rounded-xl border border-violet-500/30 hover:border-pink-400 transition-all duration-500 transform hover:scale-105 backdrop-blur-sm shadow-xl shadow-violet-500/10"
+      >
+        <div class="p-6 text-center">
+          <div class="inline-flex">
+            <img
+              class="w-8 h-8 lucide"
+              [src]="skill.icon"
+              [alt]="skill.name"
+              width="32"
+              height="32"
+              loading="lazy"
+            />
+          </div>
+          <h3 class="text-lg font-mono text-violet-400 mb-4">
+            {{ skill.name }}
+          </h3>
+
+          <div class="space-y-2">
+            <div class="font-mono flex justify-between items-center text-sm">
+              <span class="text-cyan-400">NIVEL</span>
+              <span class="text-pink-400">{{ skill.level }}</span>
+            </div>
+
+            <div class="w-full bg-slate-800 rounded-full h-3 overflow-hidden">
+              <div
+                class="bg-gradient-to-r from-violet-400 to-pink-400 h-3 rounded-full shadow-lg shadow-violet-400/50"
+                [style.width]="skill.level"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+</div>

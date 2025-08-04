@@ -1,4 +1,6 @@
-<section class="pt-16 md:pt-0 min-h-[calc(100vh-73px)] flex items-center">
+<section
+  class="pt-16 md:pt-16 lg:pt-0 min-h-[calc(100vh-73px)] flex items-center"
+>
   <div class="max-w-7xl mx-auto w-full">
     <div class="grid lg:grid-cols-2 gap-12 items-center">
       <div class="space-y-8">
@@ -10,6 +12,7 @@
 
         <!-- Botones de acción -->
         <portfolio-button-description></portfolio-button-description>
+        <pre>{{ activeItem() | json }}</pre>
       </div>
 
       <div>
@@ -20,6 +23,10 @@
       </div>
     </div>
   </div>
+</section>
+
+<section id="Habilidades">
+  <portfolio-tech-stack></portfolio-tech-stack>
 </section>
 
 <!-- <img [src]="''" alt="" /> -->

@@ -1,0 +1,56 @@
+import { isPlatformBrowser } from '@angular/common';
+import {
+  computed,
+  inject,
+  Injectable,
+  PLATFORM_ID,
+  signal,
+} from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class PortfolioNavService {
+  private _activeItem = signal<string>('Inicio');
+  private platformId = inject(PLATFORM_ID);
+
+  activeItem = computed(this._activeItem);
+
+  setActiveItem(item: string) {
+    const cleanItem = item.replace(/[\[\]]/g, '').trim();
+    this._activeItem.set(cleanItem);
+    this.scrollToSection(cleanItem);
+  }
+
+  private scrollToSection(sectionName: string) {
+    if (!isPlatformBrowser(this.platformId)) return;
+
+    let elementId = '';
+
+    switch (sectionName) {
+      case 'Inicio':
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      case 'Habilidades':
+        elementId = 'Habilidades';
+        break;
+    }
+
+    if (elementId) {
+      const element = document.getElementById(elementId);
+
+      if (element) {
+        const headerOffset = 73;
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition =
+          elementPosition + window.pageYOffset - headerOffset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth',
+        });
+      }
+    }
+  }
+}
