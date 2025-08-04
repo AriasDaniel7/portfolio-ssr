@@ -5,9 +5,17 @@ import { TextLoadingComponent } from '@shared/components/text-loading/text-loadi
 
 @Component({
   selector: 'app-portfolio-layout',
-  imports: [RouterOutlet, PortfolioNavComponent, TextLoadingComponent],
+  imports: [RouterOutlet, PortfolioNavComponent],
   templateUrl: './portfolio-layout.component.html',
   styleUrl: './portfolio-layout.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class PortfolioLayoutComponent {}
+export default class PortfolioLayoutComponent {
+  itemList = signal<string[]>([
+    '@Component',
+    '@Injectable',
+    '@Directive',
+    '@Pipe',
+    '@NgModule',
+  ]);
+}

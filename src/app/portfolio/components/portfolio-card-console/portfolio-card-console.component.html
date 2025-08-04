@@ -1,0 +1,26 @@
+<div
+  class="bg-slate-900/80 border border-violet-500/30 rounded-xl p-6 backdrop-blur-sm shadow-2xl shadow-violet-500/10"
+>
+  <div class="flex items-center space-x-2 mb-4">
+    <div class="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
+    <div class="w-3 h-3 bg-yellow-500 rounded-full animate-pulse"></div>
+    <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+    <span class="text-violet-400 font-mono text-sm ml-4">angular-cli.exe</span>
+  </div>
+  <div class="font-mono text-violet-400 space-y-2">
+    <div>
+      <span class="text-pink-400">{{ "root@danielarias:~$" }}</span>
+      <span
+        class="ml-2 pr-1"
+        animateTextWriting
+        [listItem]="listCommands()"
+      ></span>
+    </div>
+    <div class="text-cyan-400 text-sm">
+      <div>Angular CLI: +17.0.0</div>
+      <div>Node: +16.0.0</div>
+      <div>Package Manager: npm +8.0.0</div>
+      <div class="text-emerald-400">✓ Packages installed successfully</div>
+    </div>
+  </div>
+</div>

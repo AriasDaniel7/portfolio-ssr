@@ -1,5 +1,10 @@
 import { NgClass } from '@angular/common';
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  input,
+  signal,
+} from '@angular/core';
 
 @Component({
   selector: 'portfolio-nav',
@@ -9,6 +14,7 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PortfolioNavComponent {
+  itemList = input<string[]>(['Home', 'About', 'Projects', 'Blog', 'Contact']);
   isMenuOpen = signal(false);
 
   toggleMenu() {

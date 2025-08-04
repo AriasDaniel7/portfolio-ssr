@@ -1,111 +1,72 @@
 <nav
-  class="border-b border-slate-800 shadow-sm p-4 fixed top-0 left-0 right-0 z-40 bg-slate-950"
+  [ngClass]="{
+    'max-h-[73px]': !isMenuOpen(),
+    'max-h-[294px]': isMenuOpen()
+  }"
+  class="fixed overflow-hidden transition-discrete duration-300 top-0 w-full bg-slate-950/95 backdrop-blur-xl border-b border-violet-500/30 z-50"
 >
-  <div
-    [ngClass]="{
-      'max-h-[34px]': !isMenuOpen(),
-      'max-h-[176px]': isMenuOpen(),
-    }"
-    class="transition-all duration-300 ease-in-out overflow-hidden flex flex-col md:flex-row items-start md:items-center md:justify-between"
-  >
-    <div class="flex items-center justify-between w-full">
-      <a
-        class="font-bold text-green-500 text-shadow-lg text-shadow-blue-900 text-2xl"
-        >{{ "{/}" }} Code Arias</a
-      >
-      <button
-        (click)="toggleMenu()"
-        type="button"
-        class="md:hidden border h-[34px] w-[34px] flex items-center justify-center border-slate-950 hover:bg-slate-900 hover:border-slate-800 px-2 py-1 rounded-md cursor-pointer transition-colors duration-200 ease-in-out"
-      >
-        @if (!isMenuOpen()) {
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-        >
-          <g
-            fill="none"
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-          >
-            <path d="M5 5L19 19M5 19L19 5">
-              <animate
-                fill="freeze"
-                attributeName="d"
-                dur="0.4s"
-                values="M5 5L19 19M5 19L19 5;M5 5L19 5M5 19L19 19"
-              />
-            </path>
-            <path d="M12 12H12" opacity="0">
-              <animate
-                fill="freeze"
-                attributeName="d"
-                begin="0.2s"
-                dur="0.4s"
-                values="M12 12H12;M5 12H19"
-              />
-              <set fill="freeze" attributeName="opacity" begin="0.2s" to="1" />
-            </path>
-          </g>
-        </svg>
-        }@else {
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-        >
-          <g
-            fill="none"
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-          >
-            <path d="M5 12H19">
-              <animate
-                fill="freeze"
-                attributeName="d"
-                dur="0.4s"
-                values="M5 12H19;M12 12H12"
-              />
-              <set fill="freeze" attributeName="opacity" begin="0.4s" to="0" />
-            </path>
-            <path d="M5 5L19 5M5 19L19 19" opacity="0">
-              <animate
-                fill="freeze"
-                attributeName="d"
-                begin="0.2s"
-                dur="0.4s"
-                values="M5 5L19 5M5 19L19 19;M5 5L19 19M5 19L19 5"
-              />
-              <set fill="freeze" attributeName="opacity" begin="0.2s" to="1" />
-            </path>
-          </g>
-        </svg>
-        }
-      </button>
-    </div>
-
-    <ul
-      class="flex flex-col md:flex-row md:space-x-4 space-y-2 md:space-y-0 mt-6 md:mt-0"
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div
+      class="flex flex-col md:flex-row justify-between items-start md:items-center py-4"
     >
-      <li>
-        <a href="">About</a>
-      </li>
-      <li>
-        <a href="">Projects</a>
-      </li>
-      <li>
-        <a href="">Contact</a>
-      </li>
-      <li>
-        <a href="">Blog</a>
-      </li>
-    </ul>
+      <div class="flex justify-between items-center w-full">
+        <!-- Logo -->
+        <div class="flex justify-between items-center space-x-3 cursor-pointer">
+          <div class="relative">
+            <div
+              class="w-10 h-10 bg-gradient-to-br from-violet-500 to-pink-400 transform rotate-45 rounded-lg shadow-lg shadow-violet-500/25"
+            ></div>
+            <div
+              class="absolute inset-0 w-10 h-10 bg-gradient-to-tl from-pink-400 to-violet-500 transform rotate-45 rounded-lg opacity-70"
+            ></div>
+            <div
+              class="absolute inset-2 w-6 h-6 bg-slate-950/95 rounded-lg transform rotate-45"
+            ></div>
+            <span
+              class="absolute inset-0 flex items-center justify-center text-violet-400 font-bold text-sm"
+              >{{ "{/}" }}</span
+            >
+          </div>
+          <a class="text-xl md:text-2xl font-mono font-bold relative">
+            <span
+              class="text-nowrap relative bg-gradient-to-r from-violet-400 to-pink-400 bg-clip-text text-transparent"
+              >Daniel Arias.ts</span
+            >
+          </a>
+        </div>
+        <!-- Menu toggle -->
+        <div class="md:hidden">
+          <button
+            (click)="toggleMenu()"
+            class="inline-flex transition-colors hover:bg-violet-500/20 duration-300 text-violet-400 text-sm font-medium cursor-pointer px-3 h-8 items-center justify-center rounded-md border border-violet-500/30"
+          >
+            @if(isMenuOpen()){
+            <i class="fa-solid fa-xmark"></i>
+            }@else {
+            <i class="fa-solid fa-bars"></i>
+            }
+          </button>
+        </div>
+      </div>
+      <!-- Listado -->
+      <div class="mt-6 mb-2 md:my-0">
+        <ul class="md:flex space-x-8 space-y-4 md:space-y-0">
+          @for (item of itemList(); track $index) {
+          <li>
+            <a
+              class="text-violet-400 font-mono hover:text-pink-400 transition-all duration-300 relative group cursor-pointer"
+            >
+              <span class="relative">
+                {{ item }}
+              </span>
+              <div
+                class="absolute bg-gradient-to-r from-violet-500/20 to-pink-500/20 scale-0 group-hover:scale-100 inset-0 transition-transform duration-300 blur-sm rounded"
+              ></div>
+            </a>
+          </li>
+          }
+        </ul>
+      </div>
+    </div>
   </div>
 </nav>
