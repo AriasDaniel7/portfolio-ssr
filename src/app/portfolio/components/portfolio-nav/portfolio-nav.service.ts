@@ -11,7 +11,7 @@ import {
   providedIn: 'root',
 })
 export class PortfolioNavService {
-  private _activeItem = signal<string>('Inicio');
+  private _activeItem = signal<string>('');
   private platformId = inject(PLATFORM_ID);
 
   activeItem = computed(this._activeItem);
