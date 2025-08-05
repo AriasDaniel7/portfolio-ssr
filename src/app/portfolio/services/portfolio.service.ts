@@ -1,11 +1,18 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { computed, inject, Injectable, signal } from '@angular/core';
+import {
+  computed,
+  inject,
+  Injectable,
+  PLATFORM_ID,
+  signal,
+} from '@angular/core';
 import { environment } from '@environments/environment';
 import { GithubOptionsRepos } from '@portfolio/interfaces/github-options-repos.interface';
 import { GithubRepo } from '@portfolio/interfaces/github-repo.interface';
 import { GithubResponse } from '@portfolio/interfaces/github-response.interface';
-import { firstValueFrom, map, tap } from 'rxjs';
+import { firstValueFrom, map, of, tap } from 'rxjs';
 import { injectQuery } from '@tanstack/angular-query-experimental';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',
@@ -14,11 +21,23 @@ export class PortfolioService {
   private http = inject(HttpClient);
   private API_URL = environment.apiUrl;
   private _GITHUB_TOKEN = signal<string>(environment.githubToken);
+  private platformId = inject(PLATFORM_ID);
 
-  currentPage = signal(1);
+  currentPage = signal(
+    isPlatformBrowser(this.platformId)
+      ? localStorage.getItem('currentPage')
+        ? parseInt(localStorage.getItem('currentPage')!)
+        : 1
+      : 1
+  );
+
   pageSize = signal(3);
+  private _hasPrev = signal(false);
+  private _hasNext = signal(true);
 
   token = computed(this._GITHUB_TOKEN);
+  hasPrev = computed(this._hasPrev);
+  hasNext = computed(this._hasNext);
 
   getRepositories(
     options: GithubOptionsRepos = { visibility: 'all', page: 1 }
@@ -49,6 +68,11 @@ export class PortfolioService {
               hasPrev: (options.page || 1) > 1,
             },
           } as GithubResponse;
+        }),
+        tap((response) => {
+          localStorage.setItem('currentPage', this.currentPage().toString());
+          this._hasPrev.set(response.pagination.hasPrev);
+          this._hasNext.set(response.pagination.hasNext);
         })
       );
   }
