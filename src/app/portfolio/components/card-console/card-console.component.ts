@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { AnimateOnViewDirective } from '@shared/directives/animateOnView.directive';
 import { AnimateTextWritingDirective } from '@shared/directives/animateTextWriting.directive';
 
 @Component({
   selector: 'portfolio-card-console',
-  imports: [AnimateTextWritingDirective],
+  imports: [AnimateTextWritingDirective, AnimateOnViewDirective],
   templateUrl: './card-console.component.html',
   styleUrl: './card-console.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

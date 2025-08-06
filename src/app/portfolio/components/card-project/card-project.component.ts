@@ -2,10 +2,11 @@ import { TitleCasePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { GithubRepo } from '@portfolio/interfaces/github-repo.interface';
 import { ImageRepoPipe } from '@portfolio/pipes/imageRepo.pipe';
+import { AnimateOnViewDirective } from '@shared/directives/animateOnView.directive';
 
 @Component({
   selector: 'portfolio-card-project',
-  imports: [TitleCasePipe, ImageRepoPipe],
+  imports: [TitleCasePipe, ImageRepoPipe, AnimateOnViewDirective],
   templateUrl: './card-project.component.html',
   styleUrl: './card-project.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
