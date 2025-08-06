@@ -6,6 +6,8 @@ import { SectionStartComponent } from '@portfolio/sections/section-start/section
 import { SectionSkillsComponent } from '@portfolio/sections/section-skills/section-skills.component';
 import { SectionProjectsComponent } from '@portfolio/sections/section-projects/section-projects.component';
 import { SectionExperienceComponent } from "@portfolio/sections/section-experience/section-experience.component";
+import { SectionContactComponent } from "@portfolio/sections/section-contact/section-contact.component";
+import { PortfolioFooterComponent } from "@portfolio/components/portfolio-footer/portfolio-footer.component";
 
 @Component({
   selector: 'app-portfolio-home-page',
@@ -13,7 +15,9 @@ import { SectionExperienceComponent } from "@portfolio/sections/section-experien
     SectionStartComponent,
     SectionSkillsComponent,
     SectionProjectsComponent,
-    SectionExperienceComponent
+    SectionExperienceComponent,
+    SectionContactComponent,
+    PortfolioFooterComponent
 ],
   templateUrl: './portfolio-home-page.component.html',
   styleUrl: './portfolio-home-page.component.scss',

@@ -40,6 +40,9 @@ export class PortfolioNavService {
       case 'Experiencia':
         elementId = 'Experiencia';
         break;
+      case 'Contacto':
+        elementId = 'Contacto';
+        break;
     }
 
     if (elementId) {
