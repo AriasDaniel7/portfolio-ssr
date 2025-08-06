@@ -1,0 +1,7 @@
+<div class="space-y-8">
+  @for (experience of experiences(); track $index) {
+  <portfolio-card-experience
+    [experience]="experience"
+  ></portfolio-card-experience>
+  }
+</div>

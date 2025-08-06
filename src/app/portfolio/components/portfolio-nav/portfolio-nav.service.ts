@@ -37,6 +37,9 @@ export class PortfolioNavService {
       case 'Proyectos':
         elementId = 'Proyectos';
         break;
+      case 'Experiencia':
+        elementId = 'Experiencia';
+        break;
     }
 
     if (elementId) {
