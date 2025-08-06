@@ -1,11 +1,11 @@
 import { isPlatformBrowser } from '@angular/common';
 import {
-  AfterViewInit,
   Directive,
   ElementRef,
   inject,
   input,
   OnDestroy,
+  OnInit,
   PLATFORM_ID,
   Renderer2,
 } from '@angular/core';
@@ -14,7 +14,7 @@ import { Observable, Subscription, debounceTime } from 'rxjs';
 @Directive({
   selector: '[appAnimateOnView]',
 })
-export class AnimateOnViewDirective implements AfterViewInit, OnDestroy {
+export class AnimateOnViewDirective implements OnInit, OnDestroy {
   animateOnView = input<string>('animate-fadeInUp');
   threshold = input<number>(0.5);
   isContinuous = input<boolean>(true);
@@ -27,7 +27,7 @@ export class AnimateOnViewDirective implements AfterViewInit, OnDestroy {
   private renderer = inject(Renderer2);
   private subscription?: Subscription;
 
-  ngAfterViewInit(): void {
+  ngOnInit(): void {
     if (!isPlatformBrowser(this.platformId)) return;
 
     const element = this.elementRef.nativeElement;
