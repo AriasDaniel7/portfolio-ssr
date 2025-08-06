@@ -27,12 +27,15 @@
               >{{ "{/}" }}</span
             >
           </div>
-          <a class="text-xl md:text-2xl font-mono font-bold relative">
+          <span
+            (click)="setActiveItem('Inicio')"
+            class="text-xl md:text-2xl font-mono font-bold relative"
+          >
             <span
               class="text-nowrap relative bg-gradient-to-r from-violet-400 to-pink-400 bg-clip-text text-transparent"
-              >Daniel Arias.ts</span
+              >Daniel Arias.dev</span
             >
-          </a>
+          </span>
         </div>
         <!-- Menu toggle -->
         <div class="md:hidden">
@@ -55,7 +58,7 @@
           <li>
             <a
               class="text-violet-400 font-mono hover:text-pink-400 transition-all duration-300 relative group cursor-pointer"
-              (click)="portfolioNavService.setActiveItem(item)"
+              (click)="setActiveItem(item)"
             >
               <span class="relative">
                 {{ item }}

@@ -15,7 +15,7 @@ import { PortfolioNavService } from './portfolio-nav.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PortfolioNavComponent {
-  portfolioNavService = inject(PortfolioNavService);
+  private portfolioNavService = inject(PortfolioNavService);
 
   itemList = signal<string[]>([
     '[Inicio]',
@@ -29,5 +29,10 @@ export class PortfolioNavComponent {
 
   toggleMenu() {
     this.isMenuOpen.update((prev) => !prev);
+  }
+
+  setActiveItem(item: string) {
+    this.portfolioNavService.setActiveItem(item);
+    this.isMenuOpen.set(false);
   }
 }

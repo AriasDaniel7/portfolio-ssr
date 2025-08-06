@@ -15,4 +15,14 @@ export class InfoStartComponent {
   scrollToSection(sectionName: string) {
     this.portfolioNavService.setActiveItem(sectionName);
   }
+
+  downloadCV() {
+    const link = document.createElement('a');
+    link.href = '/assets/documents/CV-Daniel-Arias.pdf';
+    link.download = 'CV-Daniel-Arias.pdf';
+    link.target = '_blank';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
 }
