@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { Skill } from '@portfolio/interfaces/skill.interface';
-import { CardSkillComponent } from "../card-skill/card-skill.component";
+import { CardSkillComponent } from '../card-skill/card-skill.component';
 
 @Component({
   selector: 'portfolio-list-skills',
@@ -100,6 +100,16 @@ export class ListSkillsComponent {
       name: 'Cloudflare',
       icon: '/assets/images/skills/cloudflare.svg',
       level: '75%', // CDN/DNS
+    },
+    {
+      name: 'Laravel',
+      icon: '/assets/images/skills/laravel.svg',
+      level: '40%', // PHP framework
+    },
+    {
+      name: 'php',
+      icon: '/assets/images/skills/php.svg',
+      level: '40%', // Lenguaje backend
     },
   ]);
 }

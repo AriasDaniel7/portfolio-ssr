@@ -15,7 +15,7 @@ export class ListExperiencesComponent {
       company: 'Witsoft Group',
       ubication: 'Pamplona, Norte de Santander',
       role: 'Desarrollador web Full Stack',
-      period: 'Marzo 2025 - Julio 2025',
+      period: 'Agosto 2024 - Julio 2025',
       descriptions: [
         'Desarrollé la aplicación web para la cartelera del Teatro Cecilia (www.teatrocecilia.co)',
         'Implementé componentes modulares y dinámicos, optimizando la experiencia de usuario y reduciendo los tiempos de carga en un 20%',
