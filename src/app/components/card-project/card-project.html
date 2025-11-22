@@ -1,0 +1,145 @@
+<div
+  class="card-container border border-violet-500/30 hover:border-pink-400 rounded-xl transform hover:scale-105 transition-all duration-500 bg-slate-900/80 backdrop-blur-sm shadow-2xl shadow-violet-500/10"
+>
+  <div class="p-4 border-b border-violet-500/30 bg-slate-800/50">
+    <div class="overflow-hidden flex items-center space-x-2">
+      <div class="flex items-center space-x-2">
+        <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+        <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+        <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+      </div>
+      <div class="flex-1 overflow-hidden">
+        <div
+          class="bg-slate-700 rounded px-3 py-1 text-xs font-mono text-slate-400 text-nowrap truncate"
+        >
+          <span>
+            {{ repository().homepage }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <img
+      class="object-cover w-full aspect-video"
+      width="448"
+      height="252"
+      [alt]="repository().name"
+      [src]="repository().image"
+    />
+  </div>
+
+  <div class="card-body px-6 pb-6">
+    <div class="flex justify-center items-center gap-4 my-4">
+      <div
+        class="p-2 bg-linear-to-r from-violet-500 to-purple-600 rounded-lg shadow-lg shrink-0 w-10 h-10 flex items-center justify-center"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-code w-6 h-6"
+        >
+          <polyline points="16 18 22 12 16 6"></polyline>
+          <polyline points="8 6 2 12 8 18"></polyline>
+        </svg>
+      </div>
+
+      <div class="w-full">
+        <h3 class="text-lg font-mono text-pink-400 font-bold mb-2 leading-tight">
+          {{ repository().name | titlecase }}
+        </h3>
+      </div>
+    </div>
+
+    @if(repository().description){
+    <div class="pb-4 text-slate-300 text-sm leading-relaxed">
+      <p>{{ repository().description }}</p>
+    </div>
+    }
+
+    <div class="pt-0 flex-1">
+      @if (repository().topics.length > 0) {
+      <div class="mb-4">
+        <div class="text-xs font-mono text-violet-400 mb-2 uppercase tracking-wider">
+          TECNOLOGÍAS:
+        </div>
+        <div class="flex flex-wrap gap-1.5">
+          @for (topic of repository().topics; track $index) {
+
+          <span
+            data-slot="badge"
+            class="inline-flex items-center justify-center rounded-md border px-2 py-0.5 font-medium w-fit whitespace-nowrap shrink-0 [&amp;&gt;svg]:size-3 gap-1 [&amp;&gt;svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive overflow-hidden [a&amp;]:hover:bg-accent [a&amp;]:hover:text-accent-foreground border-pink-500/30 text-pink-400 font-mono text-xs hover:border-pink-400 transition-colors duration-300 bg-pink-500/5"
+            >{{ topic | titlecase }}</span
+          >
+          }
+        </div>
+      </div>
+      }
+    </div>
+
+    <div class="card-actions flex space-x-3">
+      @if(repository().html_url){
+      <a
+        [href]="repository().html_url"
+        target="_blank"
+        rel="noopener noreferrer"
+        data-slot="button"
+        class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive border shadow-xs hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 h-8 rounded-md gap-1.5 px-3 has-[&gt;svg]:px-2.5 border-violet-500/30 text-violet-400 hover:bg-violet-500/20 font-mono bg-transparent flex-1"
+        ><svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-github w-4 h-4 mr-2"
+        >
+          <path
+            d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"
+          ></path>
+          <path d="M9 18c-4.51 2-5-2-7-2"></path></svg
+        >Ver Código</a
+      >
+      }
+      <!--  -->
+      @if(repository().homepage){
+      <a
+        [href]="repository().homepage"
+        target="_blank"
+        rel="noopener noreferrer"
+        data-slot="button"
+        class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive border shadow-xs hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 h-8 rounded-md gap-1.5 px-3 has-[&gt;svg]:px-2.5 border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/20 font-mono bg-transparent flex-1"
+        ><svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-external-link w-4 h-4 mr-2"
+        >
+          <path d="M15 3h6v6"></path>
+          <path d="M10 14 21 3"></path>
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg
+        >Ver Live</a
+      >
+      }
+    </div>
+  </div>
+</div>
+
+

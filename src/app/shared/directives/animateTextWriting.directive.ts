@@ -1,71 +1,105 @@
 import { isPlatformBrowser } from '@angular/common';
 import {
   AfterViewInit,
+  computed,
   Directive,
+  effect,
   ElementRef,
   inject,
   input,
   PLATFORM_ID,
+  signal,
 } from '@angular/core';
 
 @Directive({
   selector: '[animateTextWriting]',
 })
 export class AnimateTextWritingDirective implements AfterViewInit {
-  private platformId = inject(PLATFORM_ID);
-  private textElement = inject<ElementRef<HTMLElement>>(ElementRef);
-  private currentItemIndex = 0;
-  listItem = input<string[]>(['Item 1', 'Item 2', 'Item 3']);
+  private readonly platformId = inject(PLATFORM_ID);
+  private readonly element = inject<ElementRef<HTMLElement>>(ElementRef);
 
+  listItem = input.required<string[]>();
   showCursor = input<boolean>(true);
   animationDelay = input<number>(1500);
   animationDuration = input<number>(100);
 
+  private readonly currentItemIndex = signal(0);
+  private readonly currentCharIndex = signal(0);
+  private readonly isTyping = signal(false);
+
+  private readonly currentText = computed(() => {
+    const items = this.listItem();
+    const index = this.currentItemIndex();
+    return items[index] ?? '';
+  });
+
+  private readonly displayText = computed(() => {
+    const text = this.currentText();
+    const charIndex = this.currentCharIndex();
+    return text.substring(0, charIndex);
+  });
+
+  private timeoutId?: ReturnType<typeof setTimeout>;
+
+  constructor() {
+    effect(() => {
+      const el = this.element.nativeElement;
+      if (el) {
+        el.textContent = this.displayText();
+      }
+    });
+  }
+
   ngAfterViewInit(): void {
     if (!isPlatformBrowser(this.platformId)) return;
 
-    const element = this.textElement.nativeElement;
-    if (!element) return;
+    const el = this.element.nativeElement;
+    const items = this.listItem();
 
-    this.startTypewritingAnimation(element);
-  }
+    if (!el || items.length === 0) return;
 
-  private startTypewritingAnimation(element: HTMLElement) {
     if (this.showCursor()) {
-      element.classList.add('typewriter-cursor');
+      el.classList.add('typewriter-cursor');
     }
 
-    element.textContent = '';
-
-    this.typeNextItem(element);
+    this.startTypewriting();
   }
 
-  private typeNextItem(element: HTMLElement) {
-    const items = this.listItem();
-    if (items.length === 0) return;
-
-    const currentText = items[this.currentItemIndex];
-    this.typeText(element, currentText);
+  ngOnDestroy(): void {
+    this.clearTimeout();
   }
 
-  private typeText(element: HTMLElement, text: string) {
-    let currentIndex = 0;
+  private startTypewriting(): void {
+    this.isTyping.set(true);
+    this.currentCharIndex.set(0);
+    this.typeNextCharacter();
+  }
 
-    const typeNextCharacter = () => {
-      if (currentIndex < text.length) {
-        element.textContent += text.charAt(currentIndex);
-        currentIndex++;
-        setTimeout(typeNextCharacter, this.animationDuration());
-      } else {
-        setTimeout(() => {
-          element.textContent = '';
-          this.currentItemIndex =
-            (this.currentItemIndex + 1) % this.listItem().length;
-          this.typeNextItem(element);
-        }, this.animationDelay());
-      }
-    };
+  private typeNextCharacter(): void {
+    const text = this.currentText();
+    const currentIndex = this.currentCharIndex();
 
-    typeNextCharacter();
+    if (currentIndex < text.length) {
+      this.currentCharIndex.update((i) => i + 1);
+      this.timeoutId = setTimeout(() => this.typeNextCharacter(), this.animationDuration());
+    } else {
+      this.isTyping.set(false);
+      this.scheduleNextItem();
+    }
+  }
+
+  private scheduleNextItem(): void {
+    this.timeoutId = setTimeout(() => {
+      const items = this.listItem();
+      this.currentItemIndex.update((i) => (i + 1) % items.length);
+      this.startTypewriting();
+    }, this.animationDelay());
+  }
+
+  private clearTimeout(): void {
+    if (this.timeoutId) {
+      clearTimeout(this.timeoutId);
+      this.timeoutId = undefined;
+    }
   }
 }

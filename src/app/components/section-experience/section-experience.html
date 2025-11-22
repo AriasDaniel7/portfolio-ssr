@@ -1,0 +1,28 @@
+<section id="Experiencia" class="max-w-7xl mx-auto py-20">
+  <div appInViewport vpAnimation="slideUp" [vpOnce]="false">
+    <div class="text-center mb-16">
+      <h2
+        class="uppercase text-xl sm:text-3xl md:text-5xl font-bold font-mono bg-linear-to-r from-cyan-400 to-emerald-400 bg-clip-text text-transparent mb-6"
+      >
+        [EXPERIENCIA_PROFESIONAL]
+      </h2>
+      <p class="text-violet-400 text-sm md:text-xl font-mono">Trayectoria como desarrollador web</p>
+    </div>
+  </div>
+
+  <div class="space-y-8">
+    @for (experience of experiences(); track $index) {
+    <portfolio-card-experience
+      appInViewport
+      vpAnimation="slideUp"
+      [vpOnce]="false"
+      [experience]="experience"
+    />
+    }
+  </div>
+
+  <div class="mt-16 grid grid-cols-1 md:grid-cols-2 items-stretch gap-8">
+    <portfolio-card-education appInViewport vpAnimation="slideRight" [vpOnce]="false" />
+    <portfolio-card-certification appInViewport vpAnimation="slideLeft" [vpOnce]="false" />
+  </div>
+</section>

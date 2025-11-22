@@ -1,0 +1,69 @@
+<nav
+  [class.max-h-[73px]]="!isMenuOpen()"
+  [class.max-h-96]="isMenuOpen()"
+  class="fixed overflow-hidden transition-discrete duration-300 ease-in-out top-0 w-full bg-slate-950/95 backdrop-blur-xl border-b border-violet-500/30 z-50 animate-slideDown"
+>
+  <div class="mx-auto px-6 max-w-7xl">
+    <div
+      class="flex md:flex-row flex-col justify-between items-start md:items-center gap-6 pb-6 md:pb-0"
+    >
+      <div class="flex justify-between items-center w-full pt-4 md:py-4">
+        <div (click)="setActiveItem('Inicio')" class="flex items-center space-x-3 cursor-pointer">
+          <div class="relative">
+            <div
+              class="w-10 h-10 bg-linear-to-br from-violet-500 to-pink-400 transform rotate-45 rounded-lg shadow-lg shadow-violet-500/25"
+            ></div>
+            <div
+              class="absolute inset-0 w-10 h-10 bg-linear-to-tl from-pink-400 to-violet-500 transform rotate-45 rounded-lg opacity-70"
+            ></div>
+            <div
+              class="absolute inset-2 w-6 h-6 bg-slate-950/95 rounded-lg transform rotate-45"
+            ></div>
+            <span
+              class="absolute inset-0 flex items-center justify-center text-violet-400 font-bold text-sm"
+              >{{ '{/}' }}</span
+            >
+          </div>
+          <div>
+            <span
+              class="font-mono font-bold md:text-2xl text-xl text-nowrap bg-linear-to-r from-violet-400 to-pink-400 bg-clip-text text-transparent"
+            >
+              Daniel Arias.dev
+            </span>
+          </div>
+        </div>
+        <!--  -->
+        <div class="md:hidden">
+          <button
+            (click)="toggleMenu()"
+            class="inline-flex transition-colors hover:bg-violet-500/20 duration-300 text-violet-400 text-sm font-medium cursor-pointer px-3 h-8 items-center justify-center rounded-md border border-violet-500/30"
+          >
+            @if(isMenuOpen()){
+            <i class="fa-solid fa-xmark"></i>
+            }@else {
+            <i class="fa-solid fa-bars"></i>
+            }
+          </button>
+        </div>
+      </div>
+      <!--  -->
+      <div>
+        <ul class="md:flex space-x-8 space-y-4 md:space-y-0">
+          @for (item of itemList(); track $index) {
+          <li>
+            <a
+              class="text-violet-400 font-mono text-sm md:text-base hover:text-pink-400 transition-colors duration-300 relative group cursor-pointer"
+              (click)="setActiveItem(item)"
+            >
+              <span class="relative">{{ item }}</span>
+              <div
+                class="absolute bg-linear-to-r from-violet-500/20 to-pink-500/20 scale-0 group-hover:scale-100 inset-0 transition-transform duration-300 blur-sm rounded"
+              ></div>
+            </a>
+          </li>
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>

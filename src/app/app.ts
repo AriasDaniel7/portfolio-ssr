@@ -1,12 +1,19 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject, signal } from '@angular/core';
+import { Nav } from '@components/nav/nav';
+import { SectionStart } from '@components/section-start/section-start';
+import { SectionProjects } from '@components/section-projects/section-projects';
+import { SectionExperience } from '@components/section-experience/section-experience';
+import { SectionContact } from '@components/section-contact/section-contact';
+import { Footer } from '@components/footer/footer';
+import { MetaService } from '@services/meta.service';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [Nav, SectionStart, SectionProjects, SectionExperience, SectionContact, Footer],
   templateUrl: './app.html',
-  styleUrl: './app.scss'
+  styleUrl: './app.css',
 })
 export class App {
-  protected readonly title = signal('portfolio-no-ssr');
+  private metaService = inject(MetaService);
+  protected readonly title = signal('Portfolio | Daniel Arias');
 }

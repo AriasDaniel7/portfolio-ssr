@@ -1,0 +1,71 @@
+<section id="Contacto" class="max-w-7xl mx-auto py-20">
+  <div>
+    <div class="text-center mb-16" appInViewport vpAnimation="slideUp" [vpOnce]="false">
+      <h2
+        class="uppercase text-xl sm:text-3xl md:text-5xl font-bold font-mono bg-linear-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent mb-6"
+      >
+        [CONECTEMOS]
+      </h2>
+      <p class="text-violet-400 text-sm md:text-xl font-mono">¿Tienes un proyecto en mente?</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+      @for (contact of contacts(); track $index) {
+      <portfolio-card-contact
+        appInViewport
+        vpAnimation="slideUp"
+        [vpOnce]="false"
+        [contact]="contact"
+      ></portfolio-card-contact>
+      }
+    </div>
+
+    <div class="text-center" appInViewport vpAnimation="slideUp" [vpOnce]="false">
+      <div class="mb-6 mt-10">
+        <div class="flex items-center justify-center text-slate-400 font-mono text-sm">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-map-pin w-4 h-4 mr-2"
+          >
+            <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+            <circle cx="12" cy="10" r="3"></circle></svg
+          >Pamplona, Norte de Santander, Colombia
+        </div>
+      </div>
+
+      <div class="flex justify-center">
+        <a
+          href="https://wa.me/573126858852?text=¡Hola!%20Me%20interesa%20iniciar%20un%20proyecto%20contigo.%20¿Podemos%20conversar%20sobre%20los%20detalles?"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-slot="button"
+          class="cursor-pointer inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm outline-none hover:bg-primary/90 h-10 rounded-md bg-linear-to-r from-violet-600 to-pink-600 hover:from-violet-700 hover:to-pink-700 text-white font-mono font-bold transform hover:scale-110 transition-all duration-300 shadow-lg shadow-violet-500/25 px-8 py-4"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-terminal w-6 h-6 mr-3"
+          >
+            <polyline points="4 17 10 11 4 5"></polyline>
+            <line x1="12" x2="20" y1="19" y2="19"></line></svg
+          >Iniciar Proyecto
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

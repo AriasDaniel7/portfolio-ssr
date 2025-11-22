@@ -1,26 +1,19 @@
 import {
   ApplicationConfig,
+  inject,
+  provideAppInitializer,
   provideBrowserGlobalErrorListeners,
   provideZonelessChangeDetection,
 } from '@angular/core';
-import { provideRouter, withViewTransitions } from '@angular/router';
+import { provideRouter, withInMemoryScrolling, withViewTransitions } from '@angular/router';
 
 import { routes } from './app.routes';
 import {
-  provideHttpClient,
-  withFetch,
-  withInterceptors,
-} from '@angular/common/http';
-import { githubInterceptor } from '@shared/interceptors/github.interceptor';
-import {
   provideClientHydration,
   withEventReplay,
+  withIncrementalHydration,
 } from '@angular/platform-browser';
-import {
-  provideTanStackQuery,
-  QueryClient,
-  withDevtools,
-} from '@tanstack/angular-query-experimental';
+import { ScrollRestoreService } from '@shared/services/scroll-restore.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -28,12 +21,17 @@ export const appConfig: ApplicationConfig = {
     provideZonelessChangeDetection(),
     provideRouter(
       routes,
-      withViewTransitions({
-        skipInitialTransition: true,
+      withViewTransitions(),
+      withInMemoryScrolling({
+        scrollPositionRestoration: 'disabled',
+        anchorScrolling: 'enabled',
       })
     ),
-    provideClientHydration(withEventReplay()),
-    provideHttpClient(withFetch(), withInterceptors([githubInterceptor])),
-    provideTanStackQuery(new QueryClient()),
+    provideClientHydration(withEventReplay(), withIncrementalHydration()),
+    provideAppInitializer(() => {
+      const svc = inject(ScrollRestoreService);
+      svc.init();
+      svc.restore();
+    }),
   ],
 };

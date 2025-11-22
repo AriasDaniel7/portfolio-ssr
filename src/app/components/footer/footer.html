@@ -1,0 +1,23 @@
+<footer
+  appInViewport
+  vpAnimation="slideUp"
+  [vpOnce]="false"
+  class="relative py-8 px-4 sm:px-6 lg:px-8 border-t border-violet-500/30 z-20"
+>
+  <div class="max-w-7xl mx-auto text-center">
+    <div class="font-mono">
+      <p class="text-violet-400 mb-2">
+        © {{ today() | date : 'yyyy' }} Daniel Arias - Software Developer
+      </p>
+      <p class="text-cyan-400 text-sm">
+        Construido con <span class="text-pink-400 animate-pulse">♥</span> usando
+        <span class="text-violet-400">Angular + Swiper</span>
+      </p>
+      <div class="flex justify-center items-center space-x-2 mt-4">
+        <div class="w-2 h-2 bg-violet-400 rounded-full animate-ping"></div>
+        <span class="text-violet-400 font-mono text-xs">Disponible para proyectos freelance</span>
+        <div class="w-2 h-2 bg-pink-400 rounded-full animate-ping"></div>
+      </div>
+    </div>
+  </div>
+</footer>
