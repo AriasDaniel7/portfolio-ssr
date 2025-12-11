@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { Experience } from '@interfaces/experience.interface';
 import { InViewportDirective } from '@shared/directives/inViewport.directive';
 import { CardExperience } from '@components/card-experience/card-experience';
-import { CardEducation } from "@components/card-education/card-education";
-import { CardCertification } from "@components/card-certification/card-certification";
+import { CardEducation } from '@components/card-education/card-education';
+import { CardCertification } from '@components/card-certification/card-certification';
 
 @Component({
   selector: 'portfolio-section-experience',
@@ -17,7 +17,7 @@ export class SectionExperience {
     {
       company: 'Witsoft Group',
       ubication: 'Pamplona, Norte de Santander',
-      role: 'Desarrollador web Full Stack',
+      role: 'Desarrollador Frontend (Angular)',
       period: 'Agosto 2024 - Junio 2025',
       descriptions: [
         'Desarrollé la aplicación web para la cartelera del Teatro Cecilia (www.teatrocecilia.co)',
@@ -33,9 +33,9 @@ export class SectionExperience {
       role: 'Desarrollador web Full Stack',
       period: 'Enero 2023 - Actualidad',
       descriptions: [
-        `Diseñé y desarrollé aplicaciones web completas utilizando Angular y NestJS, integrando bases de
-datos como PostgreSQL, MongoDB, Redis y MySQL, logrando un ahorro del 25% en tiempos de
-desarrollo gracias al uso de TypeORM.`,
+        `Diseñé y desarrollé aplicaciones web completas utilizando Angular para el frontend y NestJS y Java
+con Spring Boot para el backend, integrando bases de datos como PostgreSQL, MongoDB, Redis y
+MySQL, logrando un ahorro del 25% en tiempos de desarrollo gracias al uso de TypeORM.`,
         `Implementé despliegues automatizados en servidores VPS con Docker, Caddy, Cloudflare y Nginx,
 garantizando una disponibilidad del 99.9% en los entornos productivos.`,
         `Optimicé consultas y procesos backend, reduciendo los tiempos de respuesta en un 40% en proyectos
