@@ -1,0 +1,21 @@
+<section id="Proyectos" class="py-20 flex flex-col justify-center max-w-7xl mx-auto w-full">
+  <div class="text-center" appInViewport vpAnimation="slideUp" [vpOnce]="false">
+    <h2
+      class="uppercase text-xl sm:text-3xl md:text-5xl font-bold font-mono bg-linear-to-r from-pink-400 to-cyan-400 bg-clip-text text-transparent mb-6"
+    >
+      [PROYECTOS_DESTACADOS]
+    </h2>
+    <p class="text-violet-400 text-sm md:text-xl font-mono">Soluciones reales en producción</p>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8 py-8 w-full auto-rows-fr">
+    @for (repository of repositories(); track $index) {
+    <portfolio-card-project
+      [repository]="repository"
+      appInViewport
+      vpAnimation="slideUp"
+      [vpOnce]="false"
+    />
+    }
+  </div>
+</section>
